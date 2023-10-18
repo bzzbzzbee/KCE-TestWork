@@ -1,7 +1,8 @@
-package com.bzzbzzbee.kcetestwork.data.room
+package com.bzzbzzbee.kcetestwork.data.room.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.bzzbzzbee.kcetestwork.data.room.dao.CarsDao
 import com.bzzbzzbee.kcetestwork.data.room.models.CarDbModel
 import com.bzzbzzbee.kcetestwork.data.room.models.CarFileDbModel
 
@@ -10,7 +11,6 @@ import com.bzzbzzbee.kcetestwork.data.room.models.CarFileDbModel
         CarDbModel::class,
         CarFileDbModel::class
     ],
-    exportSchema = false,
     version = 1
 )
 abstract class CarDB : RoomDatabase() {
