@@ -2,10 +2,10 @@ package com.bzzbzzbee.kcetestwork.di
 
 import android.content.Context
 import androidx.room.Room
-import com.bzzbzzbee.kcetestwork.data.room.CarDB
-import com.bzzbzzbee.kcetestwork.data.room.CarDB.Companion.CAR_DB_NAME
-import com.bzzbzzbee.kcetestwork.data.room.CarsDao
-import com.bzzbzzbee.kcetestwork.data.room.PrepopulateCarDataBase
+import com.bzzbzzbee.kcetestwork.data.room.db.CarDB
+import com.bzzbzzbee.kcetestwork.data.room.db.CarDB.Companion.CAR_DB_NAME
+import com.bzzbzzbee.kcetestwork.data.room.dao.CarsDao
+import com.bzzbzzbee.kcetestwork.data.room.callback.PrepopulateCarDataBase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,10 +28,6 @@ class RoomModule {
 
         return dBbuilder.build()
     }
-
-    @Provides
-    fun providePrePopulateCallback(db: Provider<CarDB>): PrepopulateCarDataBase =
-        PrepopulateCarDataBase(db)
 
     @Provides
     fun carsDao(db: CarDB): CarsDao = db.carsDao()

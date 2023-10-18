@@ -1,11 +1,12 @@
-package com.bzzbzzbee.kcetestwork.data.room
+package com.bzzbzzbee.kcetestwork.data.room.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.bzzbzzbee.kcetestwork.data.room.CarDB.Companion.CARS_TABLE_NAME
+import com.bzzbzzbee.kcetestwork.data.room.db.CarDB.Companion.CARS_TABLE_NAME
+import com.bzzbzzbee.kcetestwork.data.room.db.CarDB.Companion.FILES_TABLE_NAME
 import com.bzzbzzbee.kcetestwork.data.room.models.CarDbModel
 import com.bzzbzzbee.kcetestwork.data.room.models.CarFileDbModel
 import com.bzzbzzbee.kcetestwork.data.room.models.CarWithFiles
@@ -26,4 +27,13 @@ interface CarsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(car: CarDbModel): Long
+
+    @Query("delete from $FILES_TABLE_NAME where id in (:ids)")
+    fun deleteFilesByIds(ids: List<Int>)
+
+    @Query("delete from $CARS_TABLE_NAME where carId=:id")
+    fun deleteCarById(id: Int)
+
+    @Query("delete from $FILES_TABLE_NAME where id=:carId")
+    fun deleteCarsFilesById(carId: Int)
 }
