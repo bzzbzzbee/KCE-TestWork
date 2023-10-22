@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">KCE TestWork</string>
+    <string name="all_handed">Все</string>
+    <string name="left_handed">Леворульная</string>
+    <string name="right_handed">Праворульная</string>
+    <string name="select_type">Выберите тип</string>
+    <string name="item_icon_car_transition_name">icon_car_transition_name_%1$s</string>
+    <string name="no_cars_text">Нет доступных автомобилей, хотите добавить новый автомобиль</string>
+    <string name="add_car_text">добавить новый автомобиль</string>
 </resources>
