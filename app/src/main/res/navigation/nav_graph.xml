@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/carsListFragment">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.bzzbzzbee.kcetestwork.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+
+    <fragment
+        android:id="@+id/carsListFragment"
+        android:name="com.bzzbzzbee.kcetestwork.presentation.cars.CarsListFragment"
+        android:label="CarsListFragment"
+        tools:layout="@layout/fragment_car_list">
+        <action
+            android:id="@+id/action_carsListFragment_to_carImageFullScreenFragment"
+            app:destination="@id/carImageFullScreenFragment" />
+        <action
+            android:id="@+id/action_carsListFragment_to_my_dialog_fragment"
+            app:destination="@id/my_dialog_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/carImageFullScreenFragment"
+        android:name="com.bzzbzzbee.kcetestwork.presentation.cars.CarImageFullScreenFragment"
+        android:label="CarImageFullScreenFragment"
+        tools:layout="@layout/fragment_car_image_fullscreen">
+        <argument
+            android:name="carFile"
+            app:argType="com.bzzbzzbee.kcetestwork.domain.entities.CarFile" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/my_dialog_fragment"
+        android:name="com.bzzbzzbee.kcetestwork.presentation.cars.OptionBottomDialogFragment"
+        tools:layout="@layout/dialog_filter_righthanded_car">
+    </dialog>
+</navigation>

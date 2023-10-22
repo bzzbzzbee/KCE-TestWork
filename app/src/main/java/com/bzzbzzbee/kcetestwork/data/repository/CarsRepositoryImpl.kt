@@ -18,7 +18,7 @@ class CarsRepositoryImpl @Inject constructor(private val carsDao: CarsDao) : Car
     }
 
     override suspend fun getCarFilteredRightHanded(isRightHanded: Boolean): Flow<Resource<List<Car>>> =
-        carsDao.getCars().map {
+        carsDao.getCarsFilteredRightHanded(isRightHanded).map {
             Resource.Success(it.toCarsList())
         }
 
