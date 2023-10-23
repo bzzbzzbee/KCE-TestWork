@@ -28,12 +28,9 @@ interface CarsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(car: CarDbModel): Long
 
-    @Query("delete from $FILES_TABLE_NAME where id in (:ids)")
-    fun deleteFilesByIds(ids: List<Int>)
-
     @Query("delete from $CARS_TABLE_NAME where carId=:id")
     fun deleteCarById(id: Int)
 
-    @Query("delete from $FILES_TABLE_NAME where id=:carId")
+    @Query("delete from $FILES_TABLE_NAME where carId=:carId")
     fun deleteCarsFilesById(carId: Int)
 }

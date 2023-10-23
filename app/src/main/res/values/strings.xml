@@ -7,4 +7,8 @@
     <string name="item_icon_car_transition_name">icon_car_transition_name_%1$s</string>
     <string name="no_cars_text">Нет доступных автомобилей, хотите добавить новый автомобиль</string>
     <string name="add_car_text">добавить новый автомобиль</string>
+    <string name="car_name_hint">Название авто</string>
+    <string name="car_color_hint">Цвет авто</string>
+    <string name="save">Cохранить</string>
+    <string name="delete">Удалить</string>
 </resources>

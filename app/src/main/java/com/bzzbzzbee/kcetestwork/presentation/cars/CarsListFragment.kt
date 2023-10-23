@@ -1,13 +1,12 @@
 package com.bzzbzzbee.kcetestwork.presentation.cars
 
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.withCreated
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.bzzbzzbee.kcetestwork.R
@@ -40,14 +39,10 @@ class CarsListFragment : BaseFragment(R.layout.fragment_car_list) {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCarListBinding.inflate(inflater, container, false)
+        initViews()
         initObservers()
         initListeners()
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initViews()
     }
 
     override fun onDestroyView() {
@@ -62,7 +57,7 @@ class CarsListFragment : BaseFragment(R.layout.fragment_car_list) {
         val fullText = LinkCreator.createLink(
             getString(R.string.no_cars_text),
             getString(R.string.add_car_text) to {
-                //to new car
+                navigateToCarDetail()
             }
         )
         binding.noCarsText.apply {
@@ -70,7 +65,13 @@ class CarsListFragment : BaseFragment(R.layout.fragment_car_list) {
             setLinkTextColor(
                 resources.getColor(R.color.accent, requireActivity().theme)
             )
+            movementMethod = LinkMovementMethod.getInstance()
         }
+    }
+
+    private fun navigateToCarDetail(car: Car? = null) {
+        val direction = CarsListFragmentDirections.actionCarsListFragmentToCarDetailFragment(car)
+        findNavController().navigate(direction)
     }
 
     private fun initObservers() {
@@ -98,16 +99,14 @@ class CarsListFragment : BaseFragment(R.layout.fragment_car_list) {
     private fun applyCarsListMode(cars: List<Car>) {
         with(binding) {
             carsRecycler.visible()
-            filterCarButton.visible()
             noCarsText.gone()
         }
-        carAdapter.submitList(cars.sortedBy { it.name })
+        carAdapter.submitList(cars.sortedBy { it.name.uppercase() })
     }
 
     private fun applyNoCarsMode() {
         with(binding) {
             carsRecycler.gone()
-            filterCarButton.gone()
             noCarsText.visible()
         }
     }
@@ -115,7 +114,7 @@ class CarsListFragment : BaseFragment(R.layout.fragment_car_list) {
     private fun initListeners() {
         with(binding) {
             addCarButton.setOnClickListener {
-
+                navigateToCarDetail()
             }
 
             filterCarButton.setOnClickListener {
@@ -139,6 +138,7 @@ class CarsListFragment : BaseFragment(R.layout.fragment_car_list) {
     private fun enableSwipeToEdit(adapter: CarAdapter) {
         attachSwipeToAction(requireContext(), binding.carsRecycler) { position ->
             val item: Car = adapter.currentList[position]
+            navigateToCarDetail(item)
         }
     }
 }

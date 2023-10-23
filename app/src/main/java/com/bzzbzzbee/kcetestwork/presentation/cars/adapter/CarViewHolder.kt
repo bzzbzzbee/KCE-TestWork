@@ -51,7 +51,7 @@ class CarViewHolder(
                 if (!file.isLocal) {
                     imageView.loadImage(file.resource)
                 } else {
-                    val uri = Uri.decode(file.resource)
+                    val uri = Uri.parse(file.resource)
                     imageView.loadImage(uri)
                 }
             }

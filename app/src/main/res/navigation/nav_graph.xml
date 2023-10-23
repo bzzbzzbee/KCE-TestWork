@@ -8,8 +8,7 @@
     <activity
         android:id="@+id/mainActivity"
         android:name="com.bzzbzzbee.kcetestwork.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+        android:label="activity_main" />
 
     <fragment
         android:id="@+id/carsListFragment"
@@ -22,6 +21,9 @@
         <action
             android:id="@+id/action_carsListFragment_to_my_dialog_fragment"
             app:destination="@id/my_dialog_fragment" />
+        <action
+            android:id="@+id/action_carsListFragment_to_carDetailFragment"
+            app:destination="@id/carDetailFragment" />
     </fragment>
 
     <fragment
@@ -37,6 +39,17 @@
     <dialog
         android:id="@+id/my_dialog_fragment"
         android:name="com.bzzbzzbee.kcetestwork.presentation.cars.OptionBottomDialogFragment"
-        tools:layout="@layout/dialog_filter_righthanded_car">
-    </dialog>
+        tools:layout="@layout/dialog_filter_righthanded_car"/>
+
+    <fragment
+        android:id="@+id/carDetailFragment"
+        android:name="com.bzzbzzbee.kcetestwork.presentation.cars.CarDetailFragment"
+        android:label="CarDetailFragment"
+        tools:layout="@layout/fragment_car_detail" >
+        <argument
+            android:name="car"
+            app:argType="com.bzzbzzbee.kcetestwork.domain.entities.Car"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

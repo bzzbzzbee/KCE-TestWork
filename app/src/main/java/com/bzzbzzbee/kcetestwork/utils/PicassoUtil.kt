@@ -21,4 +21,18 @@ object PicassoUtil {
             .error(R.drawable.ic_car)
             .into(this)
     }
+
+    fun ImageView.loadImageNoPlaceHolder(uri: Uri) {
+        Picasso.get()
+            .load(uri)
+            .error(R.drawable.ic_car)
+            .into(this)
+    }
+
+    fun ImageView.loadImageNoPlaceHolder(url: String) {
+        Picasso.get()
+            .load(url)
+            .error(R.drawable.ic_car)
+            .into(this)
+    }
 }
