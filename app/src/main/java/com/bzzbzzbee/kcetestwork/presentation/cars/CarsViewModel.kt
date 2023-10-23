@@ -12,6 +12,7 @@ import com.bzzbzzbee.kcetestwork.presentation.base.BaseViewModel
 import com.bzzbzzbee.kcetestwork.presentation.base.UiState
 import com.bzzbzzbee.kcetestwork.presentation.models.Option
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -35,7 +36,7 @@ class CarsViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             filterOption.collectLatest {
-                when(it) {
+                when (it) {
                     Option.All -> getCars()
                     Option.Left -> getCars(false)
                     Option.Right -> getCars(true)
@@ -47,10 +48,10 @@ class CarsViewModel @Inject constructor(
     private fun getCars() {
         viewModelScope.launch {
             getCarsUseCase().collectLatest { resource ->
-                when(resource) {
+                when (resource) {
                     is Resource.Error -> {}
                     is Resource.Success -> {
-                       _carsSF.emit(UiState.Success(resource.data))
+                        _carsSF.emit(UiState.Success(resource.data))
                     }
                 }
             }
@@ -60,7 +61,7 @@ class CarsViewModel @Inject constructor(
     private fun getCars(isRightHanded: Boolean) {
         viewModelScope.launch {
             getFilteredRightHandedCarsUseCase(isRightHanded).collectLatest { resource ->
-                when(resource) {
+                when (resource) {
                     is Resource.Error -> {}
                     is Resource.Success -> {
                         _carsSF.emit(UiState.Success(resource.data))
@@ -75,5 +76,22 @@ class CarsViewModel @Inject constructor(
             filterOption.emit(option)
         }
     }
-}
 
+    fun addCar(car: Car) {
+        viewModelScope.launch(Dispatchers.IO) {//Не успевал разобраться с проблемами у Room с suspend модификатором. Все импорты в порядке, однако есть какие-то проблемы с версионками
+            addCarUseCase(car)
+        }
+    }
+
+    fun editCar(car: Car) {
+        viewModelScope.launch(Dispatchers.IO) {
+            editCarUseCase(car)
+        }
+    }
+
+    fun deleteCar(car: Car) {
+        viewModelScope.launch(Dispatchers.IO) {
+            deleteCarUseCase(car)
+        }
+    }
+}
