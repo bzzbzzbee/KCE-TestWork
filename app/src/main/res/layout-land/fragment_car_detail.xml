@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/surface"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/carImageView"
+        android:layout_width="340dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="24dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/shape_circle"
+        android:backgroundTint="@color/accent"
+        android:padding="8dp"
+        android:src="@drawable/ic_car" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/carNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/car_name_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/carNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="БМВ" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/rightHandedSwitcher"
+            style="@style/SwitchStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:checked="true"
+            android:text="@string/right_handed"
+            app:switchPadding="8dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/carColorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/car_color_hint"
+            app:endIconDrawable="@drawable/ic_circle"
+            app:endIconMode="custom">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/carColorEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="#000000" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/MaterialButtonStyle"
+            android:id="@+id/saveCarButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/save"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/deleteCarButton"
+            style="@style/MaterialButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/delete"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:backgroundTint="@color/red"
+            tools:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>
